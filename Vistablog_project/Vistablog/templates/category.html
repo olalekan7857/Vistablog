@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% comment %} {% block title %}
+    Category posts
+{% endblock title %} {% endcomment %}
+
+
+{% block content %}
+    <!-- Category Header -->
+    <section class="category-header">
+        <div class="container">
+            <h1>{{ category.name }}</h1>
+            <p>{{ category.description|safe }}</p>
+        </div>
+    </section>
+
+    <!-- Category Posts -->
+    
+    {% if posts %}
+    <section class="category-posts">
+        <div class="container">
+            <div class="posts-container">
+                {% for post in posts %}
+                <div class="post-card">
+                    <div class="post-image">
+                        <img src="{{ post.post_image.url }}">
+                    </div>
+                    <div class="post-content">
+                        <a href="{% url 'Vistablog:category' post.category %}"><span class="category">{{ post.category.name }}</span></a>
+                        <h3><a href="{% url 'Vistablog:postpage' post.slug %}">{{ post.title }}</a></h3>
+                        <div class="excerpt">{{ post.content|safe }}</div>
+                        <a href="{% url 'Vistablog:postpage' post.slug %}" class="read-more">Read More</a>
+                        <div class="post-meta">
+                            <span>{{ post.get_human_date }} | <i class="fas fa-book-open"></i> {{ post.reading_time }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Pagination will be generated here -->
+            </div>
+            <div id="page-info"></div>
+        </div>
+    </section>
+    {% endif %}
+        
+    
+{% endblock content %}

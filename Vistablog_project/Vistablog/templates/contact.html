@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% comment %} {% block title %}
+    Contact Vistablog
+{% endblock title %} {% endcomment %}
+
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1>Get in Touch</h1>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="container">
+            <h2 class="section-title"><span class="black-text">Send us a</span> <span class="primary-deep-text">Message</span></h2>
+            
+            <form class="contact-form" method="POST">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="name">Name*</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group half">
+                        <label for="email">Email*</label>
+                        {{ form.email }}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    {{ form.subject }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    {{ form.message }}
+                </div>
+                
+                <div class="form-button">
+                    <button type="submit" class="btn-primary">SEND <i class="fas fa-paper-plane"></i></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="contact-info-content">
+                <div class="contact-method">
+                    <h3>EMAIL</h3>
+                    <p>olalekan7857@gmail.com</p> <br>
+                    <h3>PHONE</h3>
+                    <p>+2349017779308</p>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="contact-method">
+                    <h3>FOLLOW US</h3>
+                    <div class="contact-social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

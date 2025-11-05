@@ -1,0 +1,143 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    {% endblock title %}
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@200;300;400;500;600;700;800;900&family=Alegreya+Sans:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="{% url 'Vistablog:index' %}" class="logo">
+                <img src="{% static 'images/Vistablog-logo-light.png' %}" alt="Vistablog Logo">
+            </a>
+            
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="{% url 'Vistablog:index' %}">Home</a></li>
+                    
+                    {% if allcategory %}
+                    <li class="dropdown">
+                        <a>Category <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            {% for cat in allcategory %}
+                            <li><a href="{% url 'Vistablog:category' cat.slug %}">{{ cat.name }}</a></li>
+                            {% endfor %}
+                            
+                        </ul>
+                    </li>
+                    {% endif %}
+                        
+                    <li><a href="{% url 'Vistablog:about' %}">About</a></li>
+                    <li><a href="{% url 'Vistablog:contact' %}">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <div class="mobile-menu-btn">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+        
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="{% url 'Vistablog:index' %}">Home</a></li>
+                
+                {% if allcategory %}
+                <li class="mobile-dropdown">
+                    <a><span>Category</span> <i class="fas fa-chevron-down"></i></a>
+                    <ul class="mobile-dropdown-menu">
+                        {% for cat in allcategory %}
+                        <li><a href="{% url 'Vistablog:category' cat.slug %}">{{ cat.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+                    
+                <li><a href="{% url 'Vistablog:about' %}">About</a></li>
+                <li><a href="{% url 'Vistablog:contact' %}">Contact</a></li>
+            </ul>
+            
+            <div class="mobile-social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </nav>
+    </header>
+
+    
+    {% block content %}
+        
+    {% endblock content %}
+        
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section logo-section">
+                    <img src="{% static 'images/Vistablog-logo-light.png' %}" alt="Vistablog Logo" class="footer-logo">
+                    <p>Stay Curious, Stay Updated, Stay Ahead</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Build your site with us</a></li>
+                        <li><a href="#">Advertise with us</a></li>
+                        <li><a href="{% url 'Vistablog:contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'Vistablog:about' %}">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal Stuffs</h3>
+                    <ul>
+                        <li><a href="#">Privacy Notice</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div class="footer-bottom">
+                <p>&copy; All right reserved 2025 Vistablog. Designed by <a href="#" class="designer-link">Vistaweb</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

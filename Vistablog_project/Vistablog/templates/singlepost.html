@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% comment %} {% block title %}
+    Post-Detail
+{% endblock title %} {% endcomment %}
+
+
+{% block content %}
+    <!-- Blog Post Content -->
+    <article class="single-post">
+        <div class="container">
+            <h1 class="post-title">{{ myslug.title }}</h1>
+            
+            <div class="post-info">
+                <div class="singlepost-image">
+                    <img src="{{ myslug.post_image.url }}" alt="{{ myslug.title }}" class="single-post-img">
+                </div>
+
+                <div class="post-meta">
+                    <span>{{ myslug.get_human_date }}</span>
+                </div>
+
+                <div class="main-content">
+                    <p>{{ myslug.content|safe }}</p>
+                </div> 
+
+                
+                {% if myslug.content_video %}
+                <div class="single-post-video">
+                    <h1 class="left-align primary-deep-text">Video:</h1>
+                    <video controls>
+                        <source src="{{ myslug.content_video.url }}" type="video/mp4">
+                    </video>
+                </div> 
+                {% endif %}
+                    
+            </div>
+
+        </div>
+    </article>
+
+    <!-- Comments Section -->
+    <section class="comments">
+        <div class="container">
+            <h2 class="section-title left-align">Comments <span class="primary-deep-text">({{ comment_count }})</span></h2>
+            
+            <div class="comments-container">
+                {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <h3>{{ comment.commenter }} <span class="comment-date">{{ comment.get_human_date }}</span></h3>
+                    </div>
+                    <p>{{ comment.body }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Comment Form -->
+            <div class="comment-form">
+                <h2 class="left-align section-title"><span class="black-text">Leave a</span> <span class="primary-deep-text">Comment</span></h2>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.commenter }}
+                    </div>
+                    
+                    <div class="form-group">
+                        {{ form.body }}
+                    </div>
+                    
+                    <div class="form-button">
+                        <button type="submit" class="btn-primary">SEND <i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Related Posts -->
+    {% if category_posts %}
+    <section class="related-posts">
+        <div class="container">
+            <h2 class="left-align section-title"><span class="black-text">Related</span> <span class="primary-deep-text">Posts</span></h2>
+            
+            <div class="related-posts-container">
+                {% for post in category_posts %}
+                <div class="related-post">
+                    <img src="{{ post.post_image.url }}" alt="{{ post.title }}">
+                    <div class="related-post-content">
+                        <span class="post-date">{{ post.get_human_date }}</span>
+                        <h3><a href="{% url 'Vistablog:postpage' post.slug %}">{{ post.title }}</a></h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+        
+
+    
+{% endblock content %}

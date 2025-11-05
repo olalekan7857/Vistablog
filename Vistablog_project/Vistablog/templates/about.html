@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% comment %} {% block title %}
+    About Vistablog
+{% endblock title %} {% endcomment %}
+
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1>About Vistablog</h1>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    
+    {% for mission in missions %}
+    <section class="about-section">
+        <div class="container-n">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Our Mission">
+                </div>
+                <div class="about-text">
+                    <h2><span class="black-text">Our</span> <span class="primary-deep-text">Mission</span></h2>
+                    <div>{{ mission.content|safe }}</div>
+                    <a href="{% url 'Vistablog:contact' %}" class="btn-primary">CONTACT US</a>
+                </div>
+            </div>
+        </div>
+    </section>    
+    {% endfor %}
+    
+
+    <!-- Author Section -->
+    {% for profile in profiles %}
+    <section class="about-section author-section">
+        <div class="container-n">
+            <div class="about-content">
+                <div class="about-text author-text">
+                    <h2><span class="black-text">About</span> <span class="primary-deep-text">Author</span></h2>
+                    <div>{{ profile.about_author|safe }}</div>
+                    <a href="#" class="btn-primary">VIEW PORTFOLIO</a>
+                </div>
+                <div class="about-image author-img">
+                    <img src="{{ profile.author_image.url }}" alt="Author image">
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+        
+    
+
+    <!-- Acknowledgment Section -->
+    {% for Ack in Acknowledgements %}
+    <section class="acknowledgment">
+        <div class="container">
+            <h2>Acknowledgment</h2>
+            <p>{{ Ack.content|safe }}</p>
+        </div>
+    </section>    
+    {% endfor %}
+        
+    
+{% endblock content %}

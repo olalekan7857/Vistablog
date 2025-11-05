@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% comment %} {% block title %}
+    Vistablog | Stay Curious - Stay Updated - Stay Ahead
+{% endblock title %} {% endcomment %}
+
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Tech. Science. Sports. People. <br> All in One Place.</h1>
+            <p>Stay Curious, Stay Updated, Stay Ahead</p>
+        </div>
+    </section>
+
+    <!-- Latest Blog Posts -->
+    {% if posts %}
+    <section class="blog-posts">
+        <div class="container"> <br>
+            <h2 class="section-title"><span class="black-text">Latest Blog</span> <span class="primary-deep-text">Posts</span></h2>
+            
+            <div class="posts-container">
+                {% for post in posts %}
+                <div class="post-card animate-card ">
+                    <div class="post-image">
+                        <img src="{{ post.post_image.url }}">
+                    </div>
+                    <div class="post-content">
+                        <span class="category"><a href="{% url 'Vistablog:category' post.category %}">{{ post.category.name }}</a></span>
+                        <h3><a href="{% url 'Vistablog:postpage' post.slug %}">{{ post.title }}</a></h3>
+                        <div class="excerpt">{{ post.content|safe }}</div>
+                        <a href="{% url 'Vistablog:postpage' post.slug %}" class="read-more">Read More</a>
+                        <div class="post-meta">
+                            <span>{{ post.get_human_date }} | <i class="fas fa-book-open"></i> {{ post.reading_time }}</span>
+                        </div>
+                    </div>
+                </div>        
+                {% endfor %}
+        
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+
+    <!-- Categories Section -->
+    {% if categories %}
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title"><span class="black-text">Explore</span> <span class="primary-deep-text">Categories</span></h2> <br>
+            
+            <div class="categories-container">
+                {% for cat in categories %}
+                <a href="{% url 'Vistablog:category' cat.slug %}">
+                    <div class="category-box">
+                        <div class="category-icon">
+                            <i class="fas {% cycle 'fa-microchip' 'fa-lightbulb' 'fa-running' 'fa-globe-americas' %}"></i>
+                        </div>
+                        <h3>{{ cat.name }}</h3>
+                        <p>{{ cat.description|safe }}</p>
+                    </div>
+                </a>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    
+{% endblock content %}
