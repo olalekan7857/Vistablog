@@ -77,9 +77,6 @@ Vistablog/
 
 🔑 Add user authentication (register/login)
 
-💬 Enable user comments on posts
-
-📸 Image upload support for posts
 
 ☁️ Deploy to a live hosting platform
 
